@@ -1,0 +1,7 @@
+{
+  "name": "GrandDictionnaire",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
