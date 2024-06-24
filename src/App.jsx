@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import data from "./assets/data/mots.json";
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const extractWords = (jsonData) => {
+  const traverse = (obj, keysOfInterest) => {
+    for (let key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {
+        traverse(obj[key], keysOfInterest);
+      } else if (keysOfInterest.includes(key)) {
+        words.push(obj[key]);
+      }
+    }
+  };
+  const words = [];
+  const keysOfInterest = ["mot"];
+  traverse(jsonData, keysOfInterest);
+  return words;
+};
+
+const App = () => {
+  const [words, setWords] = useState([]);
+
+  useEffect(() => {
+    const extractedWords = extractWords(data);
+    setWords(extractedWords);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <h1>Liste des mots</h1>
+      <ul>
+        {words.map((word, index) => (
+          <li key={index}>{word}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-export default App
+export default App;
