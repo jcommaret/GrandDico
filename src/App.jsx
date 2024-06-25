@@ -2,7 +2,7 @@ import React from "react";
 import data from "./assets/data/mots.json";
 import { useEffect, useState } from "react";
 
-const extractWords = (jsonData) => {
+const getWords = (jsonData) => {
   const traverse = (obj, keysOfInterest) => {
     for (let key in obj) {
       if (typeof obj[key] === "object" && obj[key] !== null) {
@@ -18,12 +18,31 @@ const extractWords = (jsonData) => {
   return words;
 };
 
+const getFormes = (jsonData) => {
+  const traverse = (obj, keysOfInterest) => {
+    for (let key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {
+        traverse(obj[key], keysOfInterest);
+      } else if (keysOfInterest.includes(key)) {
+        formes.push(obj[key]);
+      }
+    }
+  };
+  const formes = [];
+  const keysOfInterest = ["formes"];
+  traverse(jsonData, keysOfInterest);
+  return formes;
+};
+
 const App = () => {
   const [words, setWords] = useState([]);
+  const [formes, setFormes] = useState([]);
 
   useEffect(() => {
-    const extractedWords = extractWords(data);
+    const extractedWords = getWords(data);
+    const extractedFormes = getFormes(data);
     setWords(extractedWords);
+    setFormes(extractedFormes);
   }, []);
 
   return (
@@ -32,6 +51,9 @@ const App = () => {
       <ul>
         {words.map((word, index) => (
           <li key={index}>{word}</li>
+        ))}
+        {formes.map((forme, index) => (
+          <li key={index}>{forme}</li>
         ))}
       </ul>
     </div>

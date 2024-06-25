@@ -1,5 +1,5 @@
 {
   "appId": "com.grandictionnaire.jcommaret",
   "appName": "GrandDictionnaire",
-  "webDir": "build"
+  "webDir": "dist"
 }
