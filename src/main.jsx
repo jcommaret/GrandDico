@@ -1,7 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import {
+  IonApp,
+  IonContent,
+  IonRouterOutlet,
+  setupIonicReact,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router";
 import "./index.css";
@@ -29,8 +34,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/home" component={App} />
-          <Redirect exact from="/" to="/home" />
+          <IonContent>
+            <Route path="/home" component={App} />
+            <Redirect exact from="/" to="/home" />
+          </IonContent>
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

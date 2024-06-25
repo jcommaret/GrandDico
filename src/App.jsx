@@ -34,6 +34,16 @@ const getFormes = (jsonData) => {
   return formes;
 };
 
+const wordBlock = (words, formes) => {
+  return words.map((word, index) => (
+    <li key={index}>
+      {word} <br />
+      <b>Formes :</b> {formes[index]}
+      <br />
+    </li>
+  ));
+};
+
 const App = () => {
   const [words, setWords] = useState([]);
   const [formes, setFormes] = useState([]);
@@ -44,18 +54,10 @@ const App = () => {
     setWords(extractedWords);
     setFormes(extractedFormes);
   }, []);
-
   return (
     <div>
       <h1>Liste des mots</h1>
-      <ul>
-        {words.map((word, index) => (
-          <li key={index}>{word}</li>
-        ))}
-        {formes.map((forme, index) => (
-          <li key={index}>{forme}</li>
-        ))}
-      </ul>
+      <ul>{wordBlock(words, formes)}</ul>
     </div>
   );
 };
