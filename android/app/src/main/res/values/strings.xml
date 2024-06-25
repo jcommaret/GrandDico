@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">granddictionnaire</string>
+    <string name="title_activity_main">granddictionnaire</string>
+    <string name="package_name">com.granddictionnaire.jcommaret</string>
+    <string name="custom_url_scheme">com.granddictionnaire.jcommaret</string>
+</resources>
