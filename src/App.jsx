@@ -1,7 +1,6 @@
 import React from "react";
 import data from "./assets/data/mots.json";
 import { useEffect, useState } from "react";
-
 const getWords = (jsonData) => {
   const traverse = (obj, keysOfInterest) => {
     for (let key in obj) {
@@ -40,6 +39,7 @@ const wordBlock = (words, formes) => {
       {word} <br />
       <b>Formes :</b> {formes[index]}
       <br />
+      <b>Exemple Estonien :</b>
     </li>
   ));
 };
@@ -51,6 +51,7 @@ const App = () => {
   useEffect(() => {
     const extractedWords = getWords(data);
     const extractedFormes = getFormes(data);
+
     setWords(extractedWords);
     setFormes(extractedFormes);
   }, []);
